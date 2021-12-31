@@ -10,4 +10,9 @@ class Bonus_model extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+	public function tampildata_bonus(){
+		$query = $this->db->query('SELECT jumlah_bonus AS label, COUNT(*) AS data from tb_bonus group by jumlah_bonus');
+		return $query->result_array();
+	}
 }
