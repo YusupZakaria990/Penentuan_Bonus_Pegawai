@@ -15,11 +15,11 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <H3 class="text font-weight-bold text-primary text-uppercase mb-1">Jumlah Bonus</H3>
+                        <H3 class="text font-weight-bold text-primary text-uppercase mb-1">STATISTIK BONUS PEGAWAI</H3>
                     </div>
                 </div>
             </div>
-                <div style="width: 400px;height: 400px">
+                <div style="width: 800px;height: 800px">
                     <canvas id="myChart"></canvas>
                 </div>
         </div>
@@ -30,67 +30,33 @@
 <!-- Chart JS -->
 
     <script>
-        $(document).ready(function() { 
-	        firstInitData();
-	          
-    	});
+        // $(document).ready(function(){
+            var cData1 = JSON.parse(`<?php echo $chartdata; ?>`);
+            var ctx1 = document.getElementById("myChart").getContext('2d');
+             console.log(cData1);
+            var myChartPos; 
 
-        var table;
-        // document.getElementById('btnReset').addEventListener('click',firstInitData);
-
-        // function firstInitData(){
-            var ctx = document.getElementById("myChart").getContext("2d");
-            // window.myChart = new Chart(canvasChart, configChart);
-            // urlChart = 'pimpinan/getbonus_pegawai';
-            // title = 'Jumlah Bonu Pegawai';
-            // setDataChart(urlChart,title); 
-            // updateTable('pimpinan/getbonus_pegawai');
-        // }
-
-        // table =  $('#example').DataTable({
-	    //     // 'iDisplayLength': 25,
-	    //     "autoWidth": true,
-	    //     'ajax' : {
-	    //         "url"   : "pimpinan/getbonus_pegawai",
-	    //         "data"  : '',
-	    //         "type"  : 'GET'
-	    //     },
-	    //     'columns' : [
-	    //         {"data" : "nama_karyawan"},
-	    //         {"data" : "jumlah_bonus"},
-	    //     ]
-	    // });
-
-        // document.getElementById('myChart').addEventListener('click', function(evt) {
-		//     var activePoints = window.myChart.getElementsAtEvent(evt)[0];
-		//     var label = window.myChart.data.labels[activePoints._index];
-		//     titleChart.push(window.myChart.data.labels[activePoints._index]);
-		//     if(label){
-		//         urlChart = 'pimpinan/getdata_bonus/'+label; 
-		//         setDataChart(urlChart,title);
-		//         urlTable = 'pimpinan/getdata_bonus'+label;    
-		//         updateTable(urlTable);
-		//     }
-		// });
-        
-        var piechart = new Chart(ctx,{type: 'pie',
-          data : {
-        // label nama setiap Value
-        labels:[
-                  'RP. 10.000',
-                  'Rp. 20.000'
-          ],
-        datasets: [{
-          // Jumlah Value yang ditampilkan
-           data:[6,3],
- 
-          backgroundColor:[
-                 'rgba(55, 20, 50, 0.5)',
-                 'rgba(99, 230, 90, 0.5)'
-            ]
-        }],
-        }
-        });
+                Datachart1 = {
+                    labels: cData1.label,
+                    datasets: [{
+                        label: "Data Bonus Karyawan",
+                        data: cData1.data,
+                        backgroundColor: ["rgba(205,64,64,0.6)", "rgba(3, 252, 219,0.6)", "rgba(32, 3, 252,0.6)", "rgba(227, 252, 3,0.6)"],
+                        borderColor: ["rgba(205,64,64,1)", "rgba(3, 252, 219,1)", "rgba(32, 3, 252,1)", "rgba(227, 252, 3,1)"],
+                        borderWidth: 1
+                    }]
+                }
+                optschart = {
+                    scales: {
+                    xAxes: [{
+                        ticks: {
+                        beginAtZero: true
+                        }
+                    }]
+                    }
+                }
+            myChartPos = new Chart(ctx1, {type: 'bar', data: Datachart1, options : optschart});               
+        // });
     </script>
 </div>
 <!-- End of Main Content -->

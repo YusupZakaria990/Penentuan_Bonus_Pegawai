@@ -11,6 +11,7 @@ class Pimpinan extends CI_Controller
         $this->load->model('Kriteria_model');
         $this->load->model('Peringkat_model');
         $this->load->model('Bonus_model');
+        $this->load->model('Chart_model');
     }
 
     public function index()
@@ -18,6 +19,8 @@ class Pimpinan extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Dashboard';
         $data['total_bonus'] = $this->Pimpinan_model->hitungTotalBonus();
+        $res = $this->Chart_model->getChart();
+        $data['chartdata'] = json_encode($res);
         $this->load->view('templates/pimpinan_header', $data);
         $this->load->view('templates/pimpinan_sidebar', $data);
         $this->load->view('templates/pimpinan_topbar', $data);
