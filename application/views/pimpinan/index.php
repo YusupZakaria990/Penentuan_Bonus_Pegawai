@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </div>
-                <div style="width: 500px;height: 500px">
+                <div style="width: 1000px;height: 1000px">
                     <canvas id="myChart"></canvas>
                 </div>
         </div>
@@ -84,32 +84,33 @@
     </script> -->
 
     <script>
-        var ctx = document.getElementById("myChart").getContext("2d");
-        // tampilan chart
-        var piechart = new Chart(ctx,{type: 'pie',
-          data : {
-        // label nama setiap Value
-        labels:[
-                  'Web Master',
-                  'Web Design',
-                  'Web Programming',
-                  'Mobile Apps',
-                  'Digital Marketing'
-          ],
-        datasets: [{
-          // Jumlah Value yang ditampilkan
-           data:[60,60,60,80,100],
- 
-          backgroundColor:[
-                 'rgba(24, 220, 110, 0.5)',
-                 'rgba(111, 80, 10, 0.5)',
-                 'rgba(11, 120, 170, 0.5)',
-                 'rgba(55, 20, 50, 0.5)',
-                 'rgba(99, 230, 90, 0.5)'
-                 ]
-        }],
-        }
-        });
+        // $(document).ready(function(){
+            var cData1 = JSON.parse(`<?php echo $chartdata; ?>`);
+            var ctx1 = document.getElementById("myChart").getContext('2d');
+             console.log(cData1);
+            var myChartPos; 
+
+                Datachart1 = {
+                    labels: cData1.label,
+                    datasets: [{
+                        label: "Data Bonus Karyawan",
+                        data: cData1.data,
+                        backgroundColor: ["rgba(205,64,64,0.6)", "rgba(3, 252, 219,0.6)", "rgba(32, 3, 252,0.6)", "rgba(227, 252, 3,0.6)"],
+                        borderColor: ["rgba(205,64,64,1)", "rgba(3, 252, 219,1)", "rgba(32, 3, 252,1)", "rgba(227, 252, 3,1)"],
+                        borderWidth: 1
+                    }]
+                }
+                optschart = {
+                    scales: {
+                    xAxes: [{
+                        ticks: {
+                        beginAtZero: true
+                        }
+                    }]
+                    }
+                }
+            myChartPos = new Chart(ctx1, {type: 'bar', data: Datachart1, options : optschart});               
+        // });
     </script>
 </div>
 <!-- End of Main Content -->
